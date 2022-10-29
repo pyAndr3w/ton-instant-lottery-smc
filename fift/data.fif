@@ -1,0 +1,19 @@
+"TonUtil.fif" include
+"Asm.fif" include
+
+// parse addr from string to slice
+// S -- s
+{ <b swap parse-smc-addr drop Addr, b> <s } : $>Addr>s
+
+"build/lottery.pk" load-generate-keypair // generate key pair
+constant private_key  // save private to constant
+constant public_key // save public to constant
+
+
+"EQCLk1384-rYMhauBsAT36YABMN5yOTNbgM29THdANTW4-qK" $>Addr>s =: owner1
+"EQC6DknYHlCJLOYw27VZ3OpAKVQ-vZBT8e6de6mgO-PCRh_S" $>Addr>s =: owner2
+"Ef9EEo2b2-xd5mHH4LgDk8uuK5qr20-Cz-zRs0CCOI3JeOmm" $>Addr>s =: echo
+
+<b owner1 s, owner2 s, echo s, b> =: addresses
+
+<b 0 64 u, 0 64 u, 0 256 u, 0 256 u, public_key B, 0 1 u, addresses ref, b>
